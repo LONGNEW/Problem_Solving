@@ -1,15 +1,20 @@
 import sys
 
-def order(in_start, in_end, post_start, post_end):
-    # a는 in_order
-    # b는 pre_order
-    if in_start > in_end or post_start > post_end:
-        return
+print("거스름돈을 입력해 주세요 :", end=" ")
+total = int(sys.stdin.readline())
 
-    parents = post_order[-1]
+print("가진 동전의 갯수를 입력해주세요 :", end=" ")
+data = list(map(int, sys.stdin.readline().split()))
 
+for idx, coin in enumerate([500, 100, 50, 10]):
+    total += data[idx] * coin
 
-n = int(sys.stdin.readline())
-in_order = list(map(int, sys.stdin.readline().split()))
-post_order = list(map(int, sys.stdin.readline().split()))
+ans = []
+for coin in [500, 100, 50, 10]:
+    ans.append(total // coin)
+    total %= coin
 
+for idx, coin in enumerate([500, 100, 50, 10]):
+    print(coin, "동전", ans[idx], "개")
+
+print("환전 후 가지고 있는 동전의 개수 :", sum(ans))
