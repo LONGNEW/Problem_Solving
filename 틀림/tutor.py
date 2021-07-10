@@ -1,20 +1,37 @@
 import sys
 
-print("거스름돈을 입력해 주세요 :", end=" ")
-total = int(sys.stdin.readline())
+def dfs(num):
+    if dp[num] > 0:
+        return dp[num]
 
-print("가진 동전의 갯수를 입력해주세요 :", end=" ")
-data = list(map(int, sys.stdin.readline().split()))
+    temp = dfs(num - 1) + 1
 
-for idx, coin in enumerate([500, 100, 50, 10]):
-    total += data[idx] * coin
+    if num % 3 == 0:
+        temp = min(temp, dfs(num // 3) + 1)
+    if num % 2 == 0:
+        temp = min(temp, dfs(num // 2) + 1)
 
-ans = []
-for coin in [500, 100, 50, 10]:
-    ans.append(total // coin)
-    total %= coin
+    dp[num] = temp
+    return dp[num]
 
-for idx, coin in enumerate([500, 100, 50, 10]):
-    print(coin, "동전", ans[idx], "개")
+n = int(sys.stdin.readline())
+dp = [0] * (n + 1)
+dp[2], dp[3] = 1, 1
 
-print("환전 후 가지고 있는 동전의 개수 :", sum(ans))
+print(dfs(n))
+
+import sys
+
+n = int(sys.stdin.readline())
+dp = [0] * (n + 1)
+dp[0] = 0
+dp[1] = 1
+
+if n == 0:
+    print(0)
+elif n == 1:
+    print(1)
+else:
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    print(dp[n])
