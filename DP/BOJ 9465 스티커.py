@@ -12,6 +12,10 @@ for i in range(T):
         data = list(map(int, sys.stdin.readline().split()))
         score.append(data)
 
+    if n == 1:
+        print(max(max(score[0]), max(score[1])))
+        continue
+
     dp[0][0] = score[0][0]
     dp[1][0] = score[1][0]
 
