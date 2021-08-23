@@ -2,9 +2,7 @@ import sys
 from collections import deque
 
 n, k = map(int, sys.stdin.readline().split())
-data = []
-visit = [[0] * n for i in range(n)]
-pos = []
+data, pos = [], []
 dx, dy = [0, 0, 1, -1], [1, -1, 0, 0]
 
 for i in range(n):
@@ -20,6 +18,7 @@ pos.sort()
 q = deque(pos)
 
 for i in range(s):
+
     for j in range(len(q)):
         value, now_x, now_y = q.popleft()
 
