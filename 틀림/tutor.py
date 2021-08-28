@@ -1,37 +1,29 @@
-import sys
+def solution(table, languages, preference):
+    temp, ans = dict(), []
 
-def dfs(num):
-    if dp[num] > 0:
-        return dp[num]
+    for i in range(len(table)):
+        text = table[i].split()
+        pos, value = text[0], [0] * (len(languages))
 
-    temp = dfs(num - 1) + 1
+        for j in range(1, len(text)):
+            if text[j] not in languages:
+                continue
+            idx = languages.index(text[j])
+            value[idx] = len(text) - j
 
-    if num % 3 == 0:
-        temp = min(temp, dfs(num // 3) + 1)
-    if num % 2 == 0:
-        temp = min(temp, dfs(num // 2) + 1)
+        temp[pos] = value
 
-    dp[num] = temp
-    return dp[num]
+    for item in temp.keys():
+        now = temp[item]
+        for i in range(len(now)):
+            now[i] = now[i] * preference[i]
+        ans.append((sum(now), item))
 
-n = int(sys.stdin.readline())
-dp = [0] * (n + 1)
-dp[2], dp[3] = 1, 1
+    ans.sort(key=lambda x:(-x[0], x[1]))
+    return ans[0][1]
 
-print(dfs(n))
+table = ["SI JAVA JAVASCRIPT SQL PYTHON C#", "CONTENTS JAVASCRIPT JAVA PYTHON SQL C++", "HARDWARE C C++ PYTHON JAVA JAVASCRIPT", "PORTAL JAVA JAVASCRIPT PYTHON KOTLIN PHP", "GAME C++ C# JAVASCRIPT C JAVA"]
+languages = ["PYTHON", "C++", "SQL"]
+preference = [7, 5, 5]
 
-import sys
-
-n = int(sys.stdin.readline())
-dp = [0] * (n + 1)
-dp[0] = 0
-dp[1] = 1
-
-if n == 0:
-    print(0)
-elif n == 1:
-    print(1)
-else:
-    for i in range(2, n + 1):
-        dp[i] = dp[i - 1] + dp[i - 2]
-    print(dp[n])
+print(solution(table, languages, preference))
