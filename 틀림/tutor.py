@@ -1,9 +1,18 @@
-import sys
+data = ["A", "E", "I", "O", "U"]
+word = []
 
-n = int(sys.stdin.readline())
-data = list(map(int, sys.stdin.readline().split()))
+def make_word(now):
+    if len(now) == 6:
+        return
 
-for i in range(1, n):
-    data[i] = max(data[i], data[i] + data[i - 1])
+    if len(now) > 0:
+        word.append(now)
 
-print(max(data))
+    for i in range(5):
+        make_word(now + data[i])
+
+
+make_word("")
+word.sort()
+
+print(len(word))
