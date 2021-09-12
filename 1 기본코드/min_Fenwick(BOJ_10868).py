@@ -56,6 +56,9 @@ def query(a, b):
         cur = cur_parent
         cur_parent -= (cur_parent & -cur_parent)
 
+    # 마지막으로 들어가지 못했던 cur 인덱스의 값 그자체를 비교한다.
+    # 구역을 물어봤을 때 포함하지 않는 구역이 있었기 때문에 원소
+    # 그 자체를 비교해야 함
     ret = min(ret, arr[cur])
     return ret
 
