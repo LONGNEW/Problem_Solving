@@ -9,6 +9,9 @@ data.sort()
 left, right = 0, l
 while left <= right:
     mid = (left + right) // 2
+    if not mid:
+        left = mid + 1
+        continue
     cnt = 0
 
     for i in range(1, len(data)):
