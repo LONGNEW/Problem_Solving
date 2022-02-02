@@ -2,26 +2,29 @@ import sys
 
 n, s = map(int, sys.stdin.readline().split())
 data = list(map(int, sys.stdin.readline().split()))
-length = n + 1
+ans = float("inf")
 
-front_idx = 0
-back_idx = 1
-temp = data[front_idx] + data[back_idx]
+start, end = 0, 0
+temp = data[0]
 
-while front_idx < n:
+while True:
+    if start > end:
+        end = start + 1
+
+        if end < n:
+            temp += data[end]
+        continue
+
     if temp >= s:
-        length = min(length, back_idx - front_idx + 1)
-        temp -= data[front_idx]
-        front_idx += 1
+        ans = min(ans, end - start + 1)
+        temp -= data[start]
+        start += 1
+        continue
 
-    else:
-        if back_idx == n and temp < s:
-            break
-        back_idx += 1
-        if back_idx != n:
-            temp += data[back_idx]
+    end += 1
+    if end >= n:
+        break
+    temp += data[end]
 
-if length == n + 1:
-    print(0)
-else:
-    print(length)
+
+print(0 if ans == float("inf") else ans)
