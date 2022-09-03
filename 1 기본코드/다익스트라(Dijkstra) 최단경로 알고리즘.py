@@ -2,7 +2,7 @@ import sys
 import heapq
 INF = 1000000
 
-n , e = map(int, sys.stdin.readline().split())
+n, e = map(int, sys.stdin.readline().split())
 start = int(sys.stdin.readline())
 graph = [[] for i in range(n + 1)]
 # 이 distance 배열의 경우엔 dijkstra 함수 안에서 초기화를 시켜서
