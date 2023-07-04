@@ -1,3 +1,6 @@
+import math
+
+
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
         diff = (numRows - 1) * 2
@@ -16,10 +19,10 @@ class Solution:
         return ret
 
     # def convert(self, s: str, numRows: int) -> str:
-    #     numCols = len(s) // numRows
-    #     numCols += (numCols - 1) * (numRows // 2)
+    #     if numRows == 1:
+    #         return s
     #
-    #     temp = [[""] * numCols for _ in range(numRows)]
+    #     temp = [[""] * 1000 for _ in range(numRows)]
     #     dx, dy = {False: 1, True: -1}, {False: 0, True: 1}
     #
     #     x, y = 0, 0
@@ -38,6 +41,4 @@ class Solution:
     #     return ret
 
 # s = Solution()
-# print(s.convert("PAYPALISHIRING", 3))
-# print(s.convert("PAYPALISHIRING", 4))
-# print(s.convert("A", 1))
+# print(s.convert("ABC", 2))
