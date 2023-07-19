@@ -24,9 +24,6 @@ class Solution:
 
             while end <= len(s):
                 temp_word = s[end - word_len:end]
-                if start + word_len > len(s):
-                    break
-
                 if temp_word not in data:
                     while start < end:
                         remove_word = s[start:start + word_len]
