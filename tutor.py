@@ -1,21 +1,21 @@
-def solution(prices):
-    answer = [0] * len(prices)
-    temp = []
-
-    for idx, item in enumerate(prices):
-        while temp:
-            top_idx, top_value = temp[-1]
-
-            if top_value <= item:
-                break
-            if top_value > item:
-                temp.pop()
-                answer[top_idx] = idx - top_idx
-        temp.append((idx, item))
-
-    while temp:
-        temp_idx, temp_item = temp.pop()
-        answer[temp_idx] = len(prices) - temp_idx - 1
-    return answer
-
-print(solution([1, 2, 3, 2, 3]))
+def majority(data, tiebreaker =None):
+ '''Return the majority element of sequence data, OR
+ tiebreaker - if exactly half of the elements in data are tiebreaker , OR
+ None otherwise.
+ '''
+  n = len(data)
+  if n == 0:
+    return tiebreaker
+ pairs = [] # empty list
+ if n % 2 == 1:
+ tiebreaker = data[-1] # last element in Python sequence
+ for i in range(0, n-1, 2): # for(i = 0; i < n-1; i+=2)
+ if data[i] == data[i+1]:
+ pairs.append(data[i])
+ major = majority(pairs, tiebreaker )
+ if major is None:
+ return None
+ nMajor = data.count(major) # handy method does the obvious
+ if 2*nMajor > n or (2*nMajor == n and major == tiebreaker ):
+ return major
+ return None # candidate did not pan out
